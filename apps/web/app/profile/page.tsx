@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Card, CardHeader, CardTitle, CardContent, LoadingSpinner, Badge } from '@devlaunch/ui';
 import { User as UserIcon, MapPin, Globe, Calendar, Users } from 'lucide-react';
 import { format } from 'date-fns';
+import Image from 'next/image';
 import type { User } from '@/types/user';
 
 /**
@@ -67,9 +68,11 @@ export default function ProfilePage() {
         <Card className="lg:col-span-2">
           <CardHeader>
             <div className="flex items-start gap-4">
-              <img
+              <Image
                 src={user.avatar}
                 alt={user.name}
+                width={80}
+                height={80}
                 className="h-20 w-20 rounded-full"
               />
               <div className="flex-1">

@@ -34,7 +34,7 @@ export const useUserStore = create<UserStore>()(
         }));
       },
 
-      login: async (email: string, password: string) => {
+      login: async (email: string, _password: string) => {
         // Mock login - in production, call your auth API
         await new Promise((resolve) => setTimeout(resolve, 1000));
 

@@ -10,7 +10,7 @@ import { useThemeStore, useUserStore, useSettingsStore } from '@/store';
 export function StoreExample() {
   const { theme, toggleTheme } = useThemeStore();
   const { isAuthenticated, name, login, logout } = useUserStore();
-  const { notifications, toggleNotifications } = useSettingsStore();
+  const { settings, updateSettings } = useSettingsStore();
 
   return (
     <div className="space-y-4 rounded-lg border p-6">
@@ -48,9 +48,18 @@ export function StoreExample() {
       {/* Settings Store */}
       <div className="space-y-2">
         <p className="text-sm">
-          Notifications: <strong>{notifications ? 'On' : 'Off'}</strong>
+          Notifications:{' '}
+          <strong>{settings.emailNotifications ? 'On' : 'Off'}</strong>
         </p>
-        <Button size="sm" variant="secondary" onClick={toggleNotifications}>
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={() =>
+            updateSettings({
+              emailNotifications: !settings.emailNotifications,
+            })
+          }
+        >
           Toggle Notifications
         </Button>
       </div>

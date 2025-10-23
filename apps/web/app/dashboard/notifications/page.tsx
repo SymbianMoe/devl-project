@@ -11,7 +11,7 @@ import {
   AnimatedItem,
   AnimatedPage,
 } from '@devlaunch/ui';
-import { generateNotifications, type Notification } from '@/lib/mock-data';
+import { generateNotifications } from '@/lib/mock-data';
 import { Bell, Check, Trash2 } from 'lucide-react';
 
 export default function NotificationsPage() {

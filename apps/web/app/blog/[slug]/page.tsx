@@ -119,8 +119,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             options={{
               mdxOptions: {
                 rehypePlugins: [
-                  rehypeHighlight,
-                  rehypeSlug,
+                  rehypeHighlight as any,
+                  rehypeSlug as any,
                   [
                     rehypeAutolinkHeadings,
                     {
@@ -129,7 +129,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         className: ['anchor'],
                       },
                     },
-                  ],
+                  ] as any,
                 ],
               },
             }}

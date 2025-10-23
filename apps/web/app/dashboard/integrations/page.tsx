@@ -14,7 +14,7 @@ import {
   AnimatedItem,
   AnimatedPage,
 } from '@devlaunch/ui';
-import { generateIntegrations, type Integration } from '@/lib/mock-data';
+import { generateIntegrations } from '@/lib/mock-data';
 import { Link as LinkIcon, ExternalLink } from 'lucide-react';
 
 export default function IntegrationsPage() {

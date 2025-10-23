@@ -15,8 +15,30 @@ import {
  *
  * This page fetches data on mount and displays with smooth animations.
  */
+interface DashboardData {
+  stats: {
+    totalRevenue: number;
+    revenueChange: number;
+    totalUsers: number;
+    usersChange: number;
+    activeUsers: number;
+    activeUsersChange: number;
+    conversionRate: number;
+    conversionRateChange: number;
+  };
+  revenueData: Array<{ month: string; revenue: number; profit: number }>;
+  userGrowthData: Array<{ month: string; users: number }>;
+  recentActivity: Array<{
+    id: string;
+    user: string;
+    action: string;
+    status: 'success' | 'pending' | 'failed';
+    timestamp: string;
+  }>;
+}
+
 export default function DashboardPage() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -89,7 +111,7 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
-  if (loading) {
+  if (loading || !data) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

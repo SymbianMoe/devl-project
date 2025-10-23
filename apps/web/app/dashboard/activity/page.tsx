@@ -8,11 +8,10 @@ import {
   SearchInput,
   Button,
 } from '@devlaunch/ui';
-import { generateActivities, type Activity } from '@/lib/mock-data';
-import { Filter } from 'lucide-react';
+import { generateActivities } from '@/lib/mock-data';
 
 export default function ActivityPage() {
-  const [activities, setActivities] = useState(() => generateActivities(50));
+  const [activities] = useState(() => generateActivities(50));
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'created' | 'updated' | 'deleted'>('all');
 
@@ -79,14 +78,12 @@ export default function ActivityPage() {
         <CardContent className="p-6">
           {filteredActivities.length > 0 ? (
             <div className="space-y-4">
-              {filteredActivities.map((activity, index) => (
+              {filteredActivities.map((activity) => (
                 <ActivityItem
                   key={activity.id}
-                  user={activity.user}
-                  action={activity.action}
-                  resource={activity.resource}
+                  title={`${activity.user} ${activity.action}`}
+                  description={activity.resource}
                   timestamp={activity.timestamp}
-                  isLast={index === filteredActivities.length - 1}
                 />
               ))}
             </div>

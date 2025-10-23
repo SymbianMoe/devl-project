@@ -17,7 +17,7 @@ import { Plus, Mail, MoreVertical } from 'lucide-react';
 import type { ColumnDef } from '@tanstack/react-table';
 
 export default function TeamPage() {
-  const [members, setMembers] = useState(() => generateTeamMembers(25));
+  const [members] = useState(() => generateTeamMembers(25));
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredMembers = members.filter(
@@ -86,7 +86,7 @@ export default function TeamPage() {
     },
     {
       id: 'actions',
-      cell: ({ row }) => (
+      cell: () => (
         <div className="flex gap-2">
           <Button variant="ghost" size="icon" className="h-8 w-8">
             <Mail className="h-4 w-4" />
