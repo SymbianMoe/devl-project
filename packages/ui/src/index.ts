@@ -26,6 +26,29 @@ export * from './components/ui/avatar';
 export * from './components/ui/progress';
 export * from './components/ui/separator';
 export * from './components/ui/calendar';
+export * from './components/ui/tooltip';
+export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './components/ui/tooltip';
+export * from './components/ui/alert';
+export { Alert, AlertTitle, AlertDescription } from './components/ui/alert';
+export * from './components/ui/alert-dialog';
+export {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from './components/ui/alert-dialog';
+export * from './components/ui/accordion';
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from './components/ui/accordion';
 
 // Theming System
 export { ThemeProvider, useTheme } from './components/ui/theme-provider';
@@ -79,6 +102,7 @@ export type { VariantProps } from 'class-variance-authority';
 // Component prop types (UI Primitives)
 export type { ButtonProps } from './components/ui/button';
 export type { BadgeProps } from './components/ui/badge';
+export type { AlertProps } from './components/ui/alert';
 
 // Component prop types (Custom Components)
 export type { LoadingSpinnerProps } from './components/loading-spinner';
