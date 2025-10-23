@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Moon, Sun, Monitor } from "lucide-react";
 import { useTheme } from "./theme-provider";
 import { Button } from "./button";
@@ -16,7 +15,7 @@ import {
 } from "./dropdown-menu";
 
 export function ThemeSwitcher() {
-  const { theme, setTheme, variant, setVariant } = useTheme();
+  const { setTheme, variant, setVariant } = useTheme();
 
   return (
     <DropdownMenu>

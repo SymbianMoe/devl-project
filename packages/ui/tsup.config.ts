@@ -1,8 +1,8 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  // Entry point
-  entry: ['src/index.ts'],
+  // Entry points
+  entry: ['src/index.ts', 'src/tailwind-preset.ts'],
 
   // Output formats
   format: ['cjs', 'esm'],

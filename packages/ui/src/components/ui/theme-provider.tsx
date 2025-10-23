@@ -31,11 +31,11 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => (typeof window !== 'undefined' ? (localStorage.getItem(storageKey) as Theme) : null) || defaultTheme
   );
   const [variant, setVariantState] = React.useState<ThemeVariant>(
     () =>
-      (localStorage.getItem(`${storageKey}-variant`) as ThemeVariant) ||
+      (typeof window !== 'undefined' ? (localStorage.getItem(`${storageKey}-variant`) as ThemeVariant) : null) ||
       defaultVariant
   );
 

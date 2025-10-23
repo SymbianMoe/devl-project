@@ -20,3 +20,7 @@ export * from './avatar';
 export * from './progress';
 export * from './separator';
 export * from './calendar';
+
+// Theming System
+export { ThemeProvider, useTheme } from './theme-provider';
+export { ThemeSwitcher } from './theme-switcher';

@@ -1,0 +1,56 @@
+# Source files (users get compiled dist/)
+# Note: src/styles/ is NOT excluded - it's needed for CSS imports
+src/components/
+src/hooks/
+src/lib/
+tsconfig.json
+tsup.config.ts
+tailwind-preset.ts
+
+# Stories (users access via Storybook URL)
+stories/
+.storybook/
+storybook-static/
+
+# Tests
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Development
+.vscode/
+.idea/
+*.log
+node_modules/
+
+# Build artifacts
+*.tsbuildinfo
+.turbo/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Linting
+.eslintrc
+.eslintrc.json
+.eslintignore
+.prettierrc
+.prettierignore
+
+# Other configs
+.editorconfig
+.nvmrc
+.npmrc
+
+# Docs (served elsewhere)
+docs/
+examples/

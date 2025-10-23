@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ESM Bundle",
+    "path": "dist/index.mjs",
+    "limit": "50 KB",
+    "gzip": true
+  },
+  {
+    "name": "CJS Bundle",
+    "path": "dist/index.js",
+    "limit": "50 KB",
+    "gzip": true
+  },
+  {
+    "name": "TypeScript Declarations",
+    "path": "dist/index.d.ts",
+    "limit": "20 KB",
+    "gzip": false
+  }
+]
