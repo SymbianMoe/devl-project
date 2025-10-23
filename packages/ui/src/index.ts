@@ -49,6 +49,42 @@ export {
   AccordionTrigger,
   AccordionContent,
 } from './components/ui/accordion';
+export * from './components/ui/breadcrumb';
+export {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from './components/ui/breadcrumb';
+export * from './components/ui/slider';
+export { Slider } from './components/ui/slider';
+export * from './components/ui/radio-group';
+export { RadioGroup, RadioGroupItem } from './components/ui/radio-group';
+export * from './components/ui/command';
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandSeparator,
+  CommandShortcut,
+} from './components/ui/command';
+export * from './components/ui/sheet';
+export {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+} from './components/ui/sheet';
 
 // Theming System
 export { ThemeProvider, useTheme } from './components/ui/theme-provider';
