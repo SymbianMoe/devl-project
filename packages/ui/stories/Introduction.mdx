@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# DevLaunch UI Library
+
+Welcome to the DevLaunch UI component library documentation.
+
+## Overview
+
+This is a production-grade React component library built with:
+
+- **React 18** - Modern React features
+- **TypeScript** - Type safety and developer experience
+- **Tailwind CSS** - Utility-first styling
+- **Radix UI** - Accessible component primitives
+- **ShadCN/UI** - Beautiful, customizable components
+
+## Getting Started
+
+### Installation
+
+```bash
+# In the monorepo
+pnpm --filter @devlaunch/ui install
+```
+
+### Usage
+
+```tsx
+import { Button, Card } from '@devlaunch/ui';
+
+function App() {
+  return (
+    <Card>
+      <Button>Click me</Button>
+    </Card>
+  );
+}
+```
+
+## Features
+
+- ✅ Fully typed with TypeScript
+- ✅ Dark mode support
+- ✅ Accessible (WCAG 2.1)
+- ✅ Responsive design
+- ✅ Composable components
+- ✅ Tree-shakeable exports
+
+## Architecture
+
+Components are organized into:
+
+- **UI Components** - Core ShadCN-based components
+- **Custom Components** - Project-specific components
+- **Hooks** - Reusable React hooks
+- **Utils** - Helper functions
+
+## Development
+
+```bash
+# Start Storybook
+pnpm --filter @devlaunch/ui storybook
+
+# Build library
+pnpm --filter @devlaunch/ui build
+
+# Run tests
+pnpm --filter @devlaunch/ui test
+```
+
+## Contributing
+
+All components should:
+- Be fully typed
+- Include Storybook stories
+- Have unit tests
+- Support dark mode
+- Be accessible

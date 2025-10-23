@@ -1,0 +1,54 @@
+---
+title: "What's New in Next.js 15"
+description: "Explore the latest features and improvements in Next.js 15, including enhanced performance and developer experience."
+date: "2024-01-15"
+author: "Alex Johnson"
+tags: ["Next.js", "React", "Web Development"]
+---
+
+# What's New in Next.js 15
+
+Next.js 15 brings significant improvements to performance, developer experience, and application capabilities. Let's dive into the most exciting features.
+
+## Enhanced App Router
+
+The App Router continues to evolve with improved streaming capabilities and better data fetching patterns. Server Components are now more powerful than ever.
+
+### Key Improvements
+
+- **Partial Prerendering**: Combine static and dynamic content seamlessly
+- **Improved Caching**: More granular cache control
+- **Better Streaming**: Enhanced loading states and suspense boundaries
+
+## Turbopack Stable
+
+Turbopack is now stable and ready for production use! The Rust-based bundler offers:
+
+- Up to 700x faster updates than Webpack
+- Optimized for large-scale applications
+- Better hot module replacement
+
+## Server Actions
+
+Server Actions make it easier than ever to handle form submissions and mutations:
+
+```typescript
+async function createPost(formData: FormData) {
+  'use server';
+
+  const title = formData.get('title');
+  // Save to database
+}
+```
+
+## Improved Image Optimization
+
+The `next/image` component now includes:
+
+- Better placeholder generation
+- Automatic format detection
+- Enhanced lazy loading
+
+## Conclusion
+
+Next.js 15 represents a major leap forward in web development. The framework continues to push the boundaries of what's possible with React while maintaining excellent developer experience.

@@ -1,0 +1,106 @@
+---
+title: "TypeScript Tips for React Developers"
+description: "Essential TypeScript patterns and best practices to write type-safe React applications with confidence."
+date: "2024-01-05"
+author: "Michael Torres"
+tags: ["TypeScript", "React", "Best Practices"]
+---
+
+# TypeScript Tips for React Developers
+
+TypeScript and React are a powerful combination. Here are essential tips to maximize type safety and developer experience.
+
+## Component Props
+
+Always type your component props explicitly:
+
+```typescript
+interface ButtonProps {
+  variant: 'primary' | 'secondary';
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+function Button({ variant, onClick, children }: ButtonProps) {
+  return (
+    <button className={variant} onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+```
+
+## Generic Components
+
+Create reusable components with generics:
+
+```typescript
+interface SelectProps<T> {
+  options: T[];
+  value: T;
+  onChange: (value: T) => void;
+  renderOption: (option: T) => React.ReactNode;
+}
+
+function Select<T>({ options, value, onChange, renderOption }: SelectProps<T>) {
+  // Implementation
+}
+```
+
+## Hooks Typing
+
+Type your custom hooks properly:
+
+```typescript
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+
+  const setValue = (value: T | ((val: T) => T)) => {
+    const valueToStore = value instanceof Function ? value(storedValue) : value;
+    setStoredValue(valueToStore);
+    window.localStorage.setItem(key, JSON.stringify(valueToStore));
+  };
+
+  return [storedValue, setValue] as const;
+}
+```
+
+## Event Handlers
+
+Use proper event types:
+
+```typescript
+function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  console.log(e.target.value);
+}
+
+function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  // Handle submit
+}
+```
+
+## Utility Types
+
+Leverage TypeScript utility types:
+
+```typescript
+// Pick specific props
+type UserPreview = Pick<User, 'id' | 'name' | 'avatar'>;
+
+// Omit certain props
+type UserWithoutPassword = Omit<User, 'password'>;
+
+// Make all properties optional
+type PartialUser = Partial<User>;
+
+// Make all properties required
+type RequiredUser = Required<User>;
+```
+
+## Conclusion
+
+These patterns will help you write more maintainable and type-safe React applications. TypeScript's type system is your friend—use it!

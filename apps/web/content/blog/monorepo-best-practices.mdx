@@ -1,0 +1,89 @@
+---
+title: "Monorepo Best Practices with pnpm"
+description: "Learn how to structure and manage a monorepo effectively using pnpm workspaces for better code sharing and developer experience."
+date: "2024-01-10"
+author: "Sarah Chen"
+tags: ["Monorepo", "pnpm", "Architecture"]
+---
+
+# Monorepo Best Practices with pnpm
+
+Managing multiple packages in a single repository can dramatically improve code sharing and developer workflow. Here's how to do it right.
+
+## Why Choose pnpm?
+
+pnpm offers several advantages over npm and yarn:
+
+- **Disk efficiency**: Single content-addressable storage
+- **Strict dependency isolation**: No phantom dependencies
+- **Faster installations**: Parallel downloads and efficient caching
+
+## Workspace Structure
+
+A well-organized monorepo typically follows this structure:
+
+```
+monorepo/
+├── apps/
+│   ├── web/
+│   └── docs/
+├── packages/
+│   ├── ui/
+│   └── utils/
+└── package.json
+```
+
+## Setting Up Workspaces
+
+Configure your `pnpm-workspace.yaml`:
+
+```yaml
+packages:
+  - 'apps/*'
+  - 'packages/*'
+```
+
+## Dependency Management
+
+### Internal Dependencies
+
+Reference workspace packages with the `workspace:*` protocol:
+
+```json
+{
+  "dependencies": {
+    "@company/ui": "workspace:*"
+  }
+}
+```
+
+### Shared Dependencies
+
+Hoist common dependencies to the root:
+
+```bash
+pnpm add -w typescript eslint prettier
+```
+
+## Build Orchestration
+
+Use `pnpm` filters for efficient builds:
+
+```bash
+# Build everything
+pnpm -r build
+
+# Build specific package and dependencies
+pnpm --filter @company/web build
+```
+
+## Best Practices
+
+1. **Version together**: Use consistent versions across packages
+2. **Share configs**: Create base configs for TypeScript, ESLint, etc.
+3. **Automate**: Use git hooks for linting and testing
+4. **Document**: Maintain clear README files for each package
+
+## Conclusion
+
+A well-structured monorepo with pnpm can significantly improve your development workflow and code quality. Start small and grow as your needs evolve.
