@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun, Monitor } from "lucide-react";
-import { useTheme } from "./theme-provider";
+import { useTheme, type ThemeVariant } from "./theme-provider";
 import { Button } from "./button";
 import {
   DropdownMenu,
@@ -43,7 +43,7 @@ export function ThemeSwitcher() {
 
         <DropdownMenuSeparator />
         <DropdownMenuLabel>Theme Variant</DropdownMenuLabel>
-        <DropdownMenuRadioGroup value={variant} onValueChange={(v) => setVariant(v as any)}>
+        <DropdownMenuRadioGroup value={variant} onValueChange={(v) => setVariant(v as ThemeVariant)}>
           <DropdownMenuRadioItem value="default">Default</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="corporate">Corporate</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="vibrant">Vibrant</DropdownMenuRadioItem>

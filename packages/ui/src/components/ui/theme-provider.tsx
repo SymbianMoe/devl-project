@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-type Theme = "light" | "dark" | "system";
-type ThemeVariant = "default" | "corporate" | "vibrant" | "minimal";
+export type Theme = "light" | "dark" | "system";
+export type ThemeVariant = "default" | "corporate" | "vibrant" | "minimal";
 
 type ThemeProviderProps = {
   children: React.ReactNode;

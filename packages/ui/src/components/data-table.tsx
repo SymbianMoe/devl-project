@@ -9,6 +9,7 @@ import {
   type SortingState,
   type VisibilityState,
   type RowSelectionState,
+  type Column,
   useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
@@ -176,12 +177,12 @@ export function DataTable<TData, TValue>({
 }
 
 // Helper component for sortable headers
-export function DataTableColumnHeader({
+export function DataTableColumnHeader<TData, TValue>({
   column,
   title,
   className,
 }: {
-  column: any;
+  column: Column<TData, TValue>;
   title: string;
   className?: string;
 }) {
