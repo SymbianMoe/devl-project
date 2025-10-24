@@ -1,0 +1,117 @@
+name: Publish to NPM
+
+# Trigger this workflow when a version tag is pushed (e.g., v1.0.0, v1.2.3)
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+# Permissions required for NPM publishing and GitHub releases
+permissions:
+  contents: write  # For creating GitHub releases
+  id-token: write  # For NPM provenance (security feature)
+
+jobs:
+  publish:
+    name: Publish Package
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup pnpm package manager
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      # Step 3: Setup Node.js with NPM registry configuration
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Step 4: Install all dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Step 5: Run linting to ensure code quality
+      - name: Run linting
+        run: pnpm --filter @devlaunch/ui lint
+
+      # Step 6: Run type checking to ensure no TypeScript errors
+      - name: Run type checking
+        run: pnpm --filter @devlaunch/ui typecheck
+
+      # Step 7: Build the package for production
+      - name: Build package
+        run: pnpm --filter @devlaunch/ui build
+
+      # Step 8: Check bundle size to ensure it's within limits
+      - name: Run bundle size check
+        run: |
+          cd packages/ui
+          pnpm run size
+
+      # Step 9: Extract version from the git tag
+      - name: Extract version from tag
+        id: extract_version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG#v}
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+      # Step 10: Verify package.json version matches the git tag
+      - name: Verify package version matches tag
+        run: |
+          PKG_VERSION=$(node -p "require('./packages/ui/package.json').version")
+          if [ "$PKG_VERSION" != "${{ steps.extract_version.outputs.VERSION }}" ]; then
+            echo "❌ package.json version ($PKG_VERSION) doesn't match tag (${{ steps.extract_version.outputs.VERSION }})"
+            exit 1
+          fi
+          echo "✅ Version match: $PKG_VERSION"
+
+      # Step 11: Publish to NPM with provenance (security feature that links package to source code)
+      - name: Publish to NPM
+        run: |
+          cd packages/ui
+          npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Step 12: Create a GitHub Release with installation instructions
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.extract_version.outputs.TAG }}
+          release_name: Release ${{ steps.extract_version.outputs.TAG }}
+          body: |
+            ## @devlaunch/ui ${{ steps.extract_version.outputs.VERSION }}
+
+            ### What's Changed
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/packages/ui/CHANGELOG.md) for details.
+
+            ### Installation
+            ```bash
+            npm install @devlaunch/ui@${{ steps.extract_version.outputs.VERSION }}
+            ```
+
+            ### Links
+            - 📦 [NPM Package](https://www.npmjs.com/package/@devlaunch/ui)
+            - 📚 [Documentation](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }})
+            - 📖 [Storybook](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }})
+          draft: false
+          prerelease: false
+
+      # Step 13: Post-publish notification with success message
+      - name: Post-publish notification
+        run: |
+          echo "✅ Successfully published @devlaunch/ui@${{ steps.extract_version.outputs.VERSION }} to NPM!"
+          echo "📦 Package URL: https://www.npmjs.com/package/@devlaunch/ui"
