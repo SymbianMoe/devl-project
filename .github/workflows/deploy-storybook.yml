@@ -2,12 +2,14 @@ name: Deploy Storybook
 
 # Trigger this workflow when pushing to master/main branch
 # Only run when UI package files change to avoid unnecessary deployments
+# TEMPORARILY DISABLED - Enable GitHub Pages first in Settings > Pages > Source: GitHub Actions
 on:
-  push:
-    branches: [master, main]
-    paths:
-      - 'packages/ui/**'
-      - '.github/workflows/deploy-storybook.yml'
+  workflow_dispatch: # Manual trigger only
+  # push:
+  #   branches: [master, main]
+  #   paths:
+  #     - 'packages/ui/**'
+  #     - '.github/workflows/deploy-storybook.yml'
 
 # Allow only one concurrent deployment to avoid conflicts
 concurrency:

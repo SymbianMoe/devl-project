@@ -1,7 +1,6 @@
 .claude/
 .husky/
 .vscode/
-.storybook/
 agents/
 
 plan.md
